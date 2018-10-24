@@ -11,13 +11,14 @@ script:
    - export container_id=$(date +%s)
    - export cleanup=false
    - docker-compose build
-   #- docker swarm init
-   #- docker stack deploy -c stacks.yml jsppage
-   #- sleep 90
-   #- docker service ls
-   #- echo "Listing files"
-   #- ls -la
-   #- wget -O- localhost:8080/webapp
+   - docker images
+   - docker swarm init
+   - docker stack deploy -c stacks.yml jsppage
+   - sleep 100
+   - docker service ls
+   - echo "Listing files"
+   - ls -la
+   - wget -O- localhost:8888/webapp
 
 after_failure:
     #- set -x
