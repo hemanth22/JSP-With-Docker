@@ -1,0 +1,7 @@
+version: '3.7'
+
+services:
+    app:
+        image: jspwithdocker_jenkins:latest
+        ports:
+            - "8888:8080"
