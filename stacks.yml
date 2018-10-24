@@ -2,6 +2,6 @@ version: '3.2'
 
 services:
     app:
-        image: jspwithdocker_jenkins:latest
+        image: jspwithdocker_web:latest
         ports:
             - "8888:8080"
