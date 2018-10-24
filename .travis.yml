@@ -1,0 +1,31 @@
+sudo: required
+language: bash
+
+env:
+  - container_id=${container_id:-$timestamp}
+
+services:
+  - docker
+
+script:
+   - export container_id=$(date +%s)
+   - export cleanup=false
+   - docker-compose build
+   #- docker swarm init
+   #- docker stack deploy -c stacks.yml jsppage
+   #- sleep 90
+   #- docker service ls
+   #- echo "Listing files"
+   #- ls -la
+   #- wget -O- localhost:8080/webapp
+
+after_failure:
+    #- set -x
+    - wget -O createIssue.sh https://gist.githubusercontent.com/hemanth22/3b5d1dae822e95b3b7b30912e7b54a62/raw/fd6405f5e9b9804a468ca96e9178cf1d354ff71c/createIssue.sh
+    - chmod 777 createIssue.sh
+    - ./createIssue.sh
+
+notifications:
+ slack:
+   rooms:
+     - nothingorganization:GN1JzklSpbMyfZVWcS05U6a0#mygitrepos
